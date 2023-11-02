@@ -10,7 +10,7 @@ list.addEventListener('click',editOrDeleteAppointment)
 function addAppointment(e){
     e.preventDefault();
 
-    axios.post("https://crudcrud.com/api/7b93292cc03e43a29340f3a397b4be25/bookingappointment",{
+    axios.post("https://crudcrud.com/api/1872b18e7abe481bb1d1a33099f86baa/bookingappointment",{
         "name":name.value,
         "email":email.value,
         "phone":phone.value
@@ -30,17 +30,19 @@ function editOrDeleteAppointment(e){
     const currentAppointment = e.target.parentElement;
     const Id = currentAppointment.id;
     if(e.target.classList.contains('delete')){
-        axios.delete(`https://crudcrud.com/api/7b93292cc03e43a29340f3a397b4be25/bookingappointment/${Id}`);
+        axios.delete(`https://crudcrud.com/api/1872b18e7abe481bb1d1a33099f86baa/bookingappointment/${Id}`)
+        list.removeChild(currentAppointment);
+
     }
     else if(e.target.classList.contains('edit')){
         list.removeChild(currentAppointment);
-        axios.get(`https://crudcrud.com/api/7b93292cc03e43a29340f3a397b4be25/bookingappointment/${Id}`)
+        axios.get(`https://crudcrud.com/api/1872b18e7abe481bb1d1a33099f86baa/bookingappointment/${Id}`)
         .then((userData)=>{
             name.value = userData.data['name'];
             email.value = userData.data['email'];
             phone.value = userData.data['phone'];
         })
-        .then(()=>{axios.delete(`https://crudcrud.com/api/7b93292cc03e43a29340f3a397b4be25/bookingappointment/${Id}`);})
+        .then(()=>{axios.delete(`https://crudcrud.com/api/1872b18e7abe481bb1d1a33099f86baa/bookingappointment/${Id}`);})
     }
 }
 
@@ -70,7 +72,7 @@ function appointmentsArray(array){
 }
 
 window.addEventListener('DOMContentLoaded',()=>{
-     const getAppointments = axios.get("https://crudcrud.com/api/7b93292cc03e43a29340f3a397b4be25/bookingappointment")
+     const getAppointments = axios.get("https://crudcrud.com/api/1872b18e7abe481bb1d1a33099f86baa/bookingappointment")
                                   .then(appointmentsData=>{
                                     appointmentsArray(appointmentsData.data);
                                   })     
