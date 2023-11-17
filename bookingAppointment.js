@@ -4,12 +4,11 @@ const phone = document.getElementById('phone');
 const submit = document.getElementById('submit');
 const list = document.getElementById('ul');
 
-submit.addEventListener('click',addAppointment);
+submit.addEventListener('click',addAppointmentOnServer);
 list.addEventListener('click',editOrDeleteAppointment)
 
-function addAppointment(e){
+function addAppointmentOnServer(e){
     e.preventDefault();
-
     axios.post("https://crudcrud.com/api/1872b18e7abe481bb1d1a33099f86baa/bookingappointment",{
         "name":name.value,
         "email":email.value,
@@ -22,8 +21,7 @@ function addAppointment(e){
         name.value="";
         email.value="";
         phone.value="";
-    })
-    
+    })  
 }
 
 function editOrDeleteAppointment(e){
